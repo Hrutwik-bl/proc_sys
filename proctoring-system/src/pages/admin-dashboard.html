@@ -2,151 +2,136 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../css/styles.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Admin Dashboard — SKIT Proctoring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link rel="stylesheet" href="../css/admin-dashboard.css"/>
 </head>
 <body>
-    <header>
-        <img src="../images/logo.png" alt="Logo"/>
-        <h1>Admin Dashboard</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="admin-dashboard.html">Management</a></li>
-            <li><a href="../login.html" onclick="logout(event)">Logout</a></li>
-        </ul>
+    <!-- Navigation -->
+    <nav class="dash-nav">
+        <div class="nav-brand">
+            <div class="brand-icon"><i class="fas fa-shield-halved"></i></div>
+            <span>SKIT Proctor</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="admin-dashboard.html" class="active"><i class="fas fa-cogs"></i> Management</a>
+            <a href="../login.html" onclick="logout(event)" class="nav-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+        <button class="nav-mobile-btn" onclick="document.querySelector('.dash-nav').classList.toggle('open')">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
-    <main>
-        <div class="dashboard-container">
-            <div class="dashboard-header">
-                <img src="../images/logo.png" alt="Logo" class="dashboard-logo"/>
-                <h1>⚙️ Manage Users</h1>
-                <p>Manage students, proctors, assignments and credentials</p>
-            </div>
 
-            <div class="tab-buttons">
-                <button class="tab-btn active" onclick="switchAdminTab('students')">Students</button>
-                <button class="tab-btn" onclick="switchAdminTab('proctors')">Proctors</button>
-                <button class="tab-btn" onclick="switchAdminTab('assignments')">Assignments</button>
-                <button class="tab-btn" onclick="switchAdminTab('credentials')">Credentials</button>
+    <main class="dash-main">
+        <!-- Welcome -->
+        <section class="dash-welcome">
+            <div>
+                <h1><i class="fas fa-sliders-h"></i> Admin Control Panel</h1>
+                <p class="welcome-sub">Manage students, proctors, assignments &amp; credentials</p>
             </div>
+        </section>
 
-            <!-- Tab 1: Students -->
-            <div id="students" class="tab-content-admin active">
-                <div class="card">
-                    <h3>Students <button class="btn btn-success" onclick="location.href='edit-student.html'">+ Add</button></h3>
+        <!-- Tabs -->
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchAdminTab('students')"><i class="fas fa-user-graduate"></i> Students</button>
+            <button class="tab-btn" onclick="switchAdminTab('proctors')"><i class="fas fa-chalkboard-teacher"></i> Proctors</button>
+            <button class="tab-btn" onclick="switchAdminTab('assignments')"><i class="fas fa-link"></i> Assignments</button>
+            <button class="tab-btn" onclick="switchAdminTab('credentials')"><i class="fas fa-key"></i> Credentials</button>
+        </div>
+
+        <!-- STUDENTS TAB -->
+        <div id="students" class="tab-content-admin active">
+            <div class="card">
+                <div class="card-heading">
+                    <h3><i class="fas fa-user-graduate"></i> Students</h3>
+                    <button class="btn-primary" onclick="location.href='edit-student.html'"><i class="fas fa-plus"></i> Add Student</button>
+                </div>
+                <div class="table-wrap">
                     <table id="adminStudents">
-                        <thead>
-                            <tr>
-                                <th>USN</th>
-                                <th>Name</th>
-                                <th>Dept</th>
-                                <th>Sem</th>
-                                <th>Assigned Proctor</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>USN</th><th>Name</th><th>Dept</th><th>Sem</th><th>Assigned Proctor</th><th>Action</th></tr></thead>
                         <tbody></tbody>
                     </table>
                 </div>
             </div>
+        </div>
 
-            <!-- Tab 2: Proctors -->
-            <div id="proctors" class="tab-content-admin">
-                <div class="card">
-                    <h3>Proctors <button class="btn btn-success" onclick="location.href='edit-proctor.html'">+ Add</button></h3>
+        <!-- PROCTORS TAB -->
+        <div id="proctors" class="tab-content-admin">
+            <div class="card">
+                <div class="card-heading">
+                    <h3><i class="fas fa-chalkboard-teacher"></i> Proctors</h3>
+                    <button class="btn-primary" onclick="location.href='edit-proctor.html'"><i class="fas fa-plus"></i> Add Proctor</button>
+                </div>
+                <div class="table-wrap">
                     <table id="adminProctors">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Dept</th>
-                                <th>Assigned Students</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>ID</th><th>Name</th><th>Dept</th><th>Assigned Students</th><th>Action</th></tr></thead>
                         <tbody></tbody>
                     </table>
                 </div>
             </div>
+        </div>
 
-            <!-- Tab 3: Assignments -->
-            <div id="assignments" class="tab-content-admin">
-                <div class="card">
-                    <h3>Assign Proctor to Student</h3>
-                    <div style="margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Select Student:</label>
-                        <select id="studentSelect" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;">
-                            <option value="">-- Choose Student --</option>
-                        </select>
+        <!-- ASSIGNMENTS TAB -->
+        <div id="assignments" class="tab-content-admin">
+            <div class="card">
+                <h3><i class="fas fa-link"></i> Assign Proctor to Student</h3>
+                <div class="assign-form">
+                    <div class="form-group">
+                        <label for="studentSelect">Select Student</label>
+                        <select id="studentSelect"><option value="">-- Choose Student --</option></select>
                     </div>
-                    <div style="margin-bottom: 1rem;">
-                        <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Select Proctor:</label>
-                        <select id="proctorSelect" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 5px;">
-                            <option value="">-- Choose Proctor --</option>
-                        </select>
+                    <div class="form-group">
+                        <label for="proctorSelect">Select Proctor</label>
+                        <select id="proctorSelect"><option value="">-- Choose Proctor --</option></select>
                     </div>
-                    <button class="btn btn-success" onclick="assignProctor()">Assign Proctor</button>
+                    <button class="btn-primary" onclick="assignProctor()"><i class="fas fa-check"></i> Assign Proctor</button>
                 </div>
+            </div>
 
-                <div class="card" style="margin-top: 1.5rem;">
-                    <h3>Current Assignments</h3>
+            <div class="card">
+                <h3><i class="fas fa-project-diagram"></i> Current Assignments</h3>
+                <div class="table-wrap">
                     <table id="assignmentsTable">
-                        <thead>
-                            <tr>
-                                <th>Student USN</th>
-                                <th>Student Name</th>
-                                <th>Assigned Proctor</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>Student USN</th><th>Student Name</th><th>Assigned Proctor</th><th>Action</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- CREDENTIALS TAB -->
+        <div id="credentials" class="tab-content-admin">
+            <div class="card">
+                <h3><i class="fas fa-id-badge"></i> Student Login Credentials</h3>
+                <div class="table-wrap">
+                    <table id="studentCredentialsTable">
+                        <thead><tr><th>USN</th><th>Name</th><th>Email / Username</th><th>Password (admin set)</th><th>Action</th></tr></thead>
                         <tbody></tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Tab 4: Credentials -->
-            <div id="credentials" class="tab-content-admin">
-                <div class="card">
-                    <h3>Student Login Credentials</h3>
-                    <table id="studentCredentialsTable">
-                        <thead>
-                            <tr>
-                                <th>USN</th>
-                                <th>Name</th>
-                                <th>Email/Username</th>
-                                <th>Password (admin set)</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-
-                <div class="card" style="margin-top: 1.5rem;">
-                    <h3>Proctor Login Credentials</h3>
+            <div class="card">
+                <h3><i class="fas fa-id-card"></i> Proctor Login Credentials</h3>
+                <div class="table-wrap">
                     <table id="proctorCredentialsTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email/Username</th>
-                                <th>Password (admin set)</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>ID</th><th>Name</th><th>Email / Username</th><th>Password (admin set)</th><th>Action</th></tr></thead>
                         <tbody></tbody>
                     </table>
                 </div>
             </div>
         </div>
     </main>
-    <footer>
-        <p>&copy; 2026 Proctoring System</p>
+
+    <footer class="dash-footer">
+        <p>&copy; 2026 SKIT Proctoring System &mdash; Built with <i class="fas fa-heart" style="color:#ef4444"></i></p>
     </footer>
+
     <script src="../js/admin-dashboard.js"></script>
 </body>
 </html>

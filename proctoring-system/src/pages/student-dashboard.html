@@ -2,230 +2,228 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <title>Student Dashboard</title>
-    <link rel="stylesheet" href="../css/styles.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Student Dashboard — SKIT Proctoring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link rel="stylesheet" href="../css/student-dashboard.css"/>
 </head>
 <body>
-    <header>
-        <img src="../images/logo.png" alt="Logo"/>
-        <h1>Student Dashboard</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="student-dashboard.html">Dashboard</a></li>
-            <li><a href="../login.html" onclick="logout(event)">Logout</a></li>
-        </ul>
+    <!-- Navigation -->
+    <nav class="dash-nav">
+        <div class="nav-brand">
+            <div class="brand-icon"><i class="fas fa-shield-halved"></i></div>
+            <span>SKIT Proctor</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="student-dashboard.html" class="active"><i class="fas fa-th-large"></i> Dashboard</a>
+            <a href="../login.html" onclick="logout(event)" class="nav-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+        <button class="nav-mobile-btn" onclick="document.querySelector('.dash-nav').classList.toggle('open')">
+            <i class="fas fa-bars"></i>
+        </button>
     </nav>
 
-    <main>
-        <div class="dashboard-container">
-            <div class="dashboard-header">
-                <img src="../images/logo.png" alt="Logo" class="dashboard-logo"/>
-                <h1>👨‍🎓 Student Dashboard</h1>
-                <p id="welcomeText">Welcome, Student!</p>
+    <main class="dash-main">
+        <!-- Welcome -->
+        <section class="dash-welcome">
+            <div>
+                <h1 id="welcomeText">Welcome, Student!</h1>
+                <p class="welcome-sub">Track your academics, exams &amp; growth in one place</p>
+            </div>
+            <div class="welcome-date" id="todayDate"></div>
+        </section>
+
+        <!-- Stat Cards -->
+        <section class="stats-grid">
+            <div class="stat-card" style="--accent:#6366f1">
+                <div class="stat-icon"><i class="fas fa-book-open"></i></div>
+                <div><p class="stat-label">Enrolled Exams</p><h3 id="enrolledExams">0</h3></div>
+            </div>
+            <div class="stat-card" style="--accent:#10b981">
+                <div class="stat-icon"><i class="fas fa-check-double"></i></div>
+                <div><p class="stat-label">Completed</p><h3 id="completedExams">0</h3></div>
+            </div>
+            <div class="stat-card" style="--accent:#06b6d4">
+                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                <div><p class="stat-label">Average Score</p><h3 id="studentAvgScore">0%</h3></div>
+            </div>
+            <div class="stat-card" style="--accent:#f59e0b">
+                <div class="stat-icon"><i class="fas fa-medal"></i></div>
+                <div><p class="stat-label">Rank</p><h3 id="studentRank">--</h3></div>
+            </div>
+        </section>
+
+        <!-- Tabs -->
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTab('profile')"><i class="fas fa-user"></i> Profile</button>
+            <button class="tab-btn" onclick="switchTab('exams')"><i class="fas fa-calendar-alt"></i> Exams</button>
+            <button class="tab-btn" onclick="switchTab('results')"><i class="fas fa-poll"></i> Results</button>
+        </div>
+
+        <!-- PROFILE TAB -->
+        <section id="profile" class="tab-content active">
+            <div class="card hero-card">
+                <div class="hero-text">
+                    <span class="badge">Self-reflection</span>
+                    <h2><i class="fas fa-brain"></i> Growth Canvas</h2>
+                    <p>Capture what makes you unique so your mentors can guide you better. Update these notes anytime.</p>
+                </div>
+                <div class="hero-chips">
+                    <span class="chip"><i class="fas fa-fingerprint"></i> Personalized</span>
+                    <span class="chip"><i class="fas fa-handshake"></i> Mentor-ready</span>
+                </div>
             </div>
 
-            <div class="stats-container">
-                <div class="stat-card">
-                    <h4>Enrolled Exams</h4>
-                    <p class="number" id="enrolledExams">0</p>
+            <div class="profile-grid">
+                <form id="studentReflectionForm" class="reflection-form">
+                    <div class="insights-grid">
+                        <div class="insight-field gradient-blue">
+                            <div class="insight-field-header">
+                                <span class="eyebrow">Confidence boost</span>
+                                <h4><i class="fas fa-star"></i> Strengths</h4>
+                            </div>
+                            <p class="insight-field-hint">List the technologies, habits, or mindsets that help you consistently perform well.</p>
+                            <textarea id="studentStrengths" name="studentStrengths" rows="3" maxlength="400" placeholder="Eg. Data structures, fast note-taking, leading labs"></textarea>
+                            <div class="input-meta">
+                                <span class="hint">3–4 highlights are enough</span>
+                                <span class="char-count" data-for="studentStrengths">0/400</span>
+                            </div>
+                        </div>
+                        <div class="insight-field gradient-amber">
+                            <div class="insight-field-header">
+                                <span class="eyebrow">Focus zone</span>
+                                <h4><i class="fas fa-crosshairs"></i> Weaknesses</h4>
+                            </div>
+                            <p class="insight-field-hint">Be honest about blockers so mentors can pair you with the right resources.</p>
+                            <textarea id="studentWeaknesses" name="studentWeaknesses" rows="3" maxlength="400" placeholder="Eg. Need more practice with DBMS queries"></textarea>
+                            <div class="input-meta">
+                                <span class="hint">Share what you are improving</span>
+                                <span class="char-count" data-for="studentWeaknesses">0/400</span>
+                            </div>
+                        </div>
+                        <div class="insight-field gradient-violet full-span">
+                            <div class="insight-field-header">
+                                <span class="eyebrow">Story mode</span>
+                                <h4><i class="fas fa-feather-alt"></i> About You</h4>
+                            </div>
+                            <p class="insight-field-hint">Describe learning goals, dream roles, or anything personal that drives you.</p>
+                            <textarea id="studentAbout" name="studentAbout" rows="4" maxlength="500" placeholder="Eg. I want to become a ML engineer working on education tools"></textarea>
+                            <div class="input-meta">
+                                <span class="hint">Paint a quick narrative</span>
+                                <span class="char-count" data-for="studentAbout">0/500</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Save Insights</button>
+                        <span id="reflectionStatus" class="save-status" aria-live="polite"></span>
+                    </div>
+                </form>
+
+                <aside class="card profile-performance">
+                    <div class="preview-header">
+                        <span class="eyebrow">Performance pulse</span>
+                        <h4>How you're trending</h4>
+                    </div>
+                    <div class="profile-chart-wrapper">
+                        <div class="chart-stack">
+                            <canvas id="profilePerformanceChart" height="220"></canvas>
+                            <div class="chart-center">
+                                <span id="profileChartValue">--</span>
+                                <small>avg score</small>
+                            </div>
+                        </div>
+                        <p id="profileChartEmpty" class="chart-empty-text">Complete exams to unlock your personal gauge.</p>
+                    </div>
+                    <ul class="profile-metrics">
+                        <li><span>Completed</span><strong id="profileCompleted">0</strong></li>
+                        <li><span>Pass ratio</span><strong id="profilePassRate">0/0</strong></li>
+                        <li><span>Best score</span><strong id="profileBest">--</strong></li>
+                    </ul>
+                </aside>
+            </div>
+        </section>
+
+        <!-- EXAMS TAB -->
+        <section id="exams" class="tab-content">
+            <div class="card">
+                <h3><i class="fas fa-bell"></i> Upcoming Notifications</h3>
+                <div id="upcomingNotifications" class="notification-feed">
+                    <p class="notification-empty">No upcoming exams scheduled yet.</p>
                 </div>
-                <div class="stat-card">
-                    <h4>Completed</h4>
-                    <p class="number" id="completedExams">0</p>
-                </div>
-                <div class="stat-card">
-                    <h4>Average Score</h4>
-                    <p class="number" id="studentAvgScore">0%</p>
-                </div>
-                <div class="stat-card">
-                    <h4>Rank</h4>
-                    <p class="number" id="studentRank">--</p>
+            </div>
+        </section>
+
+        <!-- RESULTS TAB -->
+        <section id="results" class="tab-content">
+            <div class="card">
+                <div class="card-heading"><h3><i class="fas fa-chart-area"></i> Performance Report</h3></div>
+                <div class="chart-wrapper">
+                    <canvas id="performanceChart" height="220"></canvas>
+                    <p id="chartEmptyMessage" class="chart-empty">Your performance graph will appear after you complete exams.</p>
                 </div>
             </div>
 
-            <div class="tab-buttons">
-                <button class="tab-btn active" onclick="switchTab('profile')">Profile</button>
-                <button class="tab-btn" onclick="switchTab('exams')">Exams</button>
-                <button class="tab-btn" onclick="switchTab('results')">Results</button>
-            </div>
-
-            <section id="profile" class="tab-content active">
-                <div class="card insight-hero">
-                    <div class="insight-hero-content">
-                        <p class="eyebrow">Self-reflection</p>
-                        <h3>🧠 Growth Canvas</h3>
-                        <p>Capture what makes you unique so your mentors can guide you better. Update these notes anytime you evolve.</p>
-                    </div>
-                    <div class="insight-hero-badges">
-                        <span class="badge">Personalized</span>
-                        <span class="badge">Mentor-ready</span>
-                    </div>
+            <div class="card">
+                <div class="card-heading">
+                    <h3><i class="fas fa-book"></i> Internal Marks</h3>
+                    <span id="internalMarksAverage" class="tag-pill subtle">Avg --</span>
                 </div>
-
-                <div class="insight-layout">
-                    <form id="studentReflectionForm" class="insight-form">
-                        <div class="insights-grid">
-                            <div class="insight-field gradient-blue">
-                                <div class="insight-field-header">
-                                    <span class="eyebrow">Confidence boost</span>
-                                    <h4>Strengths</h4>
-                                </div>
-                                <p class="insight-field-hint">List the technologies, habits, or mindsets that help you consistently perform well.</p>
-                                <textarea id="studentStrengths" name="studentStrengths" rows="3" maxlength="400" placeholder="Eg. Data structures, fast note-taking, leading labs"></textarea>
-                                <div class="input-meta">
-                                    <span class="hint">3–4 highlights are enough</span>
-                                    <span class="char-count" data-for="studentStrengths">0/400</span>
-                                </div>
-                            </div>
-
-                            <div class="insight-field gradient-amber">
-                                <div class="insight-field-header">
-                                    <span class="eyebrow">Focus zone</span>
-                                    <h4>Weaknesses</h4>
-                                </div>
-                                <p class="insight-field-hint">Be honest about blockers so mentors can pair you with the right resources.</p>
-                                <textarea id="studentWeaknesses" name="studentWeaknesses" rows="3" maxlength="400" placeholder="Eg. Need more practice with DBMS queries"></textarea>
-                                <div class="input-meta">
-                                    <span class="hint">Share what you are improving</span>
-                                    <span class="char-count" data-for="studentWeaknesses">0/400</span>
-                                </div>
-                            </div>
-
-                            <div class="insight-field gradient-violet full-span">
-                                <div class="insight-field-header">
-                                    <span class="eyebrow">Story mode</span>
-                                    <h4>About You</h4>
-                                </div>
-                                <p class="insight-field-hint">Describe learning goals, dream roles, or anything personal that drives you.</p>
-                                <textarea id="studentAbout" name="studentAbout" rows="4" maxlength="500" placeholder="Eg. I want to become a ML engineer working on education tools"></textarea>
-                                <div class="input-meta">
-                                    <span class="hint">Paint a quick narrative</span>
-                                    <span class="char-count" data-for="studentAbout">0/500</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-actions">
-                            <button type="submit" class="primary-btn">Save Insights</button>
-                            <span id="reflectionStatus" class="save-status" aria-live="polite"></span>
-                        </div>
-                    </form>
-
-                    <aside class="card profile-performance">
-                        <div class="preview-header">
-                            <p class="eyebrow">Performance pulse</p>
-                            <h4>How you're trending</h4>
-                        </div>
-                        <div class="profile-chart-wrapper">
-                            <div class="chart-stack">
-                                <canvas id="profilePerformanceChart" height="220"></canvas>
-                                <div class="chart-center">
-                                    <span id="profileChartValue">--</span>
-                                    <small>avg score</small>
-                                </div>
-                            </div>
-                            <p id="profileChartEmpty" class="chart-empty-text">Complete exams to unlock your personal gauge.</p>
-                        </div>
-                        <ul class="profile-metrics">
-                            <li>
-                                <span>Completed</span>
-                                <strong id="profileCompleted">0</strong>
-                            </li>
-                            <li>
-                                <span>Pass ratio</span>
-                                <strong id="profilePassRate">0/0</strong>
-                            </li>
-                            <li>
-                                <span>Best score</span>
-                                <strong id="profileBest">--</strong>
-                            </li>
-                        </ul>
-                    </aside>
-                </div>
-            </section>
-
-            <section id="exams" class="tab-content">
-                <div class="card">
-                    <h3>🛎️ Upcoming Notifications</h3>
-                    <div id="upcomingNotifications" class="notification-feed">
-                        <p class="notification-empty">No upcoming exams scheduled yet.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="results" class="tab-content">
-                <div class="card chart-card">
-                    <h3>📈 Performance Report</h3>
-                    <div class="chart-wrapper">
-                        <canvas id="performanceChart" height="220"></canvas>
-                        <p id="chartEmptyMessage" class="chart-empty">Your performance graph will appear after you complete exams.</p>
-                    </div>
-                </div>
-
-                <div class="card internal-table-card">
-                    <div class="card-heading">
-                        <h3>📘 Internal Marks</h3>
-                        <span id="internalMarksAverage" class="tag-pill subtle">Avg --</span>
-                    </div>
+                <div class="table-wrap">
                     <table id="internalMarksTable">
-                        <thead>
-                            <tr><th>Exam</th><th>Component</th><th>Marks</th><th>Recorded On</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td colspan="4" style="text-align:center;">No internal marks published yet</td></tr>
-                        </tbody>
+                        <thead><tr><th>Exam</th><th>Component</th><th>Marks</th><th>Recorded On</th></tr></thead>
+                        <tbody><tr><td colspan="4" style="text-align:center;">No internal marks published yet</td></tr></tbody>
                     </table>
                 </div>
+            </div>
 
-                <div class="card external-sync-card">
-                    <div class="sync-header">
-                        <div>
-                            <h3>🌐 VTU External Results</h3>
-                            <p class="muted">Auto-updated via VTU Sync</p>
-                        </div>
-                        <button id="syncExternalBtn" class="primary-btn outline">Sync Now</button>
+            <div class="card">
+                <div class="sync-header">
+                    <div>
+                        <h3><i class="fas fa-globe"></i> VTU External Results</h3>
+                        <p class="muted">Auto-updated via VTU Sync</p>
                     </div>
-                    <p id="externalSyncStatus" class="sync-status muted">Last synced: --</p>
+                    <button id="syncExternalBtn" class="btn-outline"><i class="fas fa-sync-alt"></i> Sync Now</button>
+                </div>
+                <p id="externalSyncStatus" class="sync-status muted">Last synced: --</p>
+                <div class="table-wrap">
                     <table id="externalResultsTable">
-                        <thead>
-                            <tr><th>Course</th><th>Score</th><th>Grade</th><th>Credits</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td colspan="4" style="text-align:center;">Sync to fetch latest external results</td></tr>
-                        </tbody>
+                        <thead><tr><th>Course</th><th>Score</th><th>Grade</th><th>Credits</th></tr></thead>
+                        <tbody><tr><td colspan="4" style="text-align:center;">Sync to fetch latest external results</td></tr></tbody>
                     </table>
                 </div>
+            </div>
 
-                <div class="card">
-                    <h3>📊 Past Results</h3>
+            <div class="card">
+                <div class="card-heading"><h3><i class="fas fa-history"></i> Past Results</h3></div>
+                <div class="table-wrap">
                     <table id="resultsTable">
-                        <thead>
-                            <tr><th>Exam</th><th>Date</th><th>Score</th><th>Status</th><th>Remarks</th><th>Invigilator</th></tr>
-                        </thead>
+                        <thead><tr><th>Exam</th><th>Date</th><th>Score</th><th>Status</th><th>Remarks</th><th>Invigilator</th></tr></thead>
                         <tbody></tbody>
                     </table>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Proctoring System</p>
+    <footer class="dash-footer">
+        <p>&copy; 2026 SKIT Proctoring System &mdash; Built with <i class="fas fa-heart" style="color:#ef4444"></i></p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js" integrity="sha384-fCI3jGDdPvqORdzdrIWYA2blRsXUOcEHpGjk6Jg7HzOeVZNbYUZHC0J8JGZve56d" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js" crossorigin="anonymous"></script>
     <script src="../js/student-dashboard.js"></script>
     <script>
-    // minimal tab switch helper (keeps UI consistent with proctor)
     function switchTab(name){
         document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
         document.getElementById(name).classList.add('active');
         event.target.classList.add('active');
     }
+    document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
     </script>
 </body>
 </html>

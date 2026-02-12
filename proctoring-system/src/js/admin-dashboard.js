@@ -217,7 +217,7 @@ function renderCredentials() {
         tr.innerHTML = `<td>${cred.usn}</td>
                         <td>${student.fullName || '--'}</td>
                         <td>${cred.email || '--'}</td>
-                        <td><input id="pwd-st-${cred.usn}" type="text" value="${cred.password || ''}" style="width:140px;padding:6px;border:1px solid #ddd;border-radius:4px;" /></td>
+                        <td><input id="pwd-st-${cred.usn}" type="text" value="${cred.password || ''}" class="pwd-input" /></td>
                         <td>
                           <button class="btn" onclick="saveStudentPassword('${cred.usn}')">Save</button>
                           <button class="btn copy-btn" onclick="copyToClipboard(document.getElementById('pwd-st-${cred.usn}').value)">Copy</button>
@@ -236,7 +236,7 @@ function renderCredentials() {
         tr.innerHTML = `<td>${cred.id}</td>
                         <td>${proctor.name || '--'}</td>
                         <td>${cred.email || '--'}</td>
-                        <td><input id="pwd-pr-${cred.id}" type="text" value="${cred.password || ''}" style="width:140px;padding:6px;border:1px solid #ddd;border-radius:4px;" /></td>
+                        <td><input id="pwd-pr-${cred.id}" type="text" value="${cred.password || ''}" class="pwd-input" /></td>
                         <td>
                           <button class="btn" onclick="saveProctorPassword('${cred.id}')">Save</button>
                           <button class="btn copy-btn" onclick="copyToClipboard(document.getElementById('pwd-pr-${cred.id}').value)">Copy</button>

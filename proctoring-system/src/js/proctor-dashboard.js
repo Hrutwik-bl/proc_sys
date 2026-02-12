@@ -271,7 +271,7 @@ function renderStudents() {
     assignedStudents.forEach(s => {
         const tr = document.createElement('tr');
         tr.innerHTML = `<td>${s.usn}</td>
-                        <td><a href="student-detail.html?usn=${encodeURIComponent(s.usn)}" style="color: #667eea; text-decoration: none;">${s.fullName}</a></td>
+                        <td><a href="student-detail.html?usn=${encodeURIComponent(s.usn)}">${s.fullName}</a></td>
                         <td>${s.gsuite}</td>
                         <td>${s.dept}</td>
                         <td>${s.phone}</td>
