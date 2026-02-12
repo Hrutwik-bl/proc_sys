@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Student Assignments</title>
+    <link rel="stylesheet" href="../css/styles.css"/>
+</head>
+<body>
+    <header>
+        <img src="../images/logo.png" alt="Logo"/>
+        <h1>Student Assignments</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="admin-dashboard.html">Back to Admin</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="dashboard-container">
+            <div class="card">
+                <h3>Student - Proctor Assignments</h3>
+                <table id="assignmentsTable">
+                    <thead>
+                        <tr>
+                            <th>Student USN</th>
+                            <th>Student Name</th>
+                            <th>Department</th>
+                            <th>Assigned Proctor</th>
+                            <th>Proctor ID</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Proctoring System</p>
+    </footer>
+    <script>
+        function renderAssignments() {
+            const assignments = JSON.parse(localStorage.getItem('assignments') || '[]');
+            const students = JSON.parse(localStorage.getItem('students') || '[]');
+            const proctors = JSON.parse(localStorage.getItem('proctors') || '[]');
+            
+            const tbody = document.querySelector('#assignmentsTable tbody');
+            tbody.innerHTML = '';
+            
+            assignments.forEach(a => {
+                const student = students.find(s => s.usn === a.usn);
+                const proctor = proctors.find(p => p.id === a.proctorId);
+                
+                if (student && proctor) {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${student.usn}</td><td>${student.fullName}</td><td>${student.dept}</td>
+                    <td>${proctor.name}</td><td>${proctor.id}</td>
+                    <td><button class="btn btn-danger" onclick="removeAssignment('${a.usn}', '${a.proctorId}')">Remove</button></td>`;
+                    tbody.appendChild(tr);
+                }
+            });
+            
+            if (assignments.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center;">No assignments yet</td></tr>';
+            }
+        }
+        
+        function removeAssignment(usn, proctorId) {
+            if (!confirm('Remove this assignment?')) return;
+            let assignments = JSON.parse(localStorage.getItem('assignments') || '[]');
+            assignments = assignments.filter(a => !(a.usn === usn && a.proctorId === proctorId));
+            localStorage.setItem('assignments', JSON.stringify(assignments));
+            renderAssignments();
+        }
+        
+        renderAssignments();
+    </script>
+</body>
+</html>

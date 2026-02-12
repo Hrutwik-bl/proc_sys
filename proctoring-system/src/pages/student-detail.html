@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Student Detail</title>
+    <link rel="stylesheet" href="../css/styles.css"/>
+    <link rel="stylesheet" href="../css/student-detail.css"/>
+</head>
+<body>
+    <header>
+        <img src="../images/logo.png" alt="Logo"/>
+        <h1>Student Detail</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="proctor-dashboard.html">Back to Dashboard</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="detail-container">
+            <section class="card profile-card">
+                <div class="profile-heading">
+                    <div>
+                        <p class="eyebrow">Student Overview</p>
+                        <h2 id="studentName">--</h2>
+                        <p id="studentStatus" class="muted">Loading profile...</p>
+                    </div>
+                    <div class="profile-badges">
+                        <span class="badge" id="studentUSN">--</span>
+                        <span class="badge" id="studentDept">--</span>
+                        <span class="badge" id="studentSem">--</span>
+                    </div>
+                </div>
+                <div class="profile-grid">
+                    <div class="profile-item">
+                        <span>Email</span>
+                        <strong id="studentEmail">--</strong>
+                    </div>
+                    <div class="profile-item">
+                        <span>Phone</span>
+                        <strong id="studentPhone">--</strong>
+                    </div>
+                    <div class="profile-item">
+                        <span>Section</span>
+                        <strong id="studentSec">--</strong>
+                    </div>
+                    <div class="profile-item">
+                        <span>Parent</span>
+                        <strong id="studentParent">--</strong>
+                    </div>
+                    <div class="profile-item">
+                        <span>Parent Phone</span>
+                        <strong id="studentParentPhone">--</strong>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card marks-card">
+                <div class="card-heading">
+                    <div>
+                        <p class="eyebrow">Internal Assessments</p>
+                        <h3>Recorded Marks</h3>
+                    </div>
+                    <button id="newEntryBtn" class="btn">Add New</button>
+                </div>
+                <table id="studentMarksTable">
+                    <thead>
+                        <tr>
+                            <th>Exam</th>
+                            <th>Component</th>
+                            <th>Marks</th>
+                            <th>Updated</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="5" style="text-align:center;">No internal marks recorded yet</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="card marks-form-card">
+                <div class="card-heading">
+                    <div>
+                        <p class="eyebrow">Manage Marks</p>
+                        <h3 id="marksFormTitle">Add Internal Entry</h3>
+                    </div>
+                    <button id="resetFormBtn" class="btn btn-outline">Reset</button>
+                </div>
+                <form id="studentMarksForm" class="marks-form">
+                    <input type="hidden" id="marksEntryId"/>
+                    <div class="form-grid">
+                        <label>Exam / Course
+                            <select id="marksExamSelect" required>
+                                <option value="">Select exam</option>
+                            </select>
+                        </label>
+                        <label>Component
+                            <select id="marksComponent" required>
+                                <option value="IA-1">IA-1</option>
+                                <option value="IA-2">IA-2</option>
+                                <option value="IA-3">IA-3</option>
+                                <option value="Assignment">Assignment</option>
+                                <option value="Project">Project</option>
+                            </select>
+                        </label>
+                        <label>Marks (out of 50)
+                            <input type="number" id="marksScore" min="0" max="50" placeholder="e.g., 45" required/>
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Save Marks</button>
+                        <span id="marksFormStatus" class="save-status" aria-live="polite"></span>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Proctoring System. All rights reserved.</p>
+    </footer>
+    <script src="../js/student-detail.js"></script>
+</body>
+</html>

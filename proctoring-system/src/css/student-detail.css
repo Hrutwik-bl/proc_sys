@@ -1,0 +1,66 @@
+:root{
+  --detail-muted:#64748b;
+  --detail-border:#e2e8f0;
+  --detail-bg:#f8fafc;
+}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  background:#eef2ff;
+  color:#0f172a;
+}
+header,nav{background:#fff0;border-bottom:1px solid rgba(15,23,42,0.05)}
+header{padding:1rem 2rem;display:flex;align-items:center;gap:12px}
+header img{width:48px;height:48px}
+header h1{margin:0;font-size:1.4rem;color:#4c51bf}
+nav{padding:0.4rem 2rem}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:1rem}
+nav a{text-decoration:none;color:#1f2937;font-weight:600}
+
+.detail-container{
+  max-width:1100px;margin:2rem auto;padding:0 1rem;display:flex;flex-direction:column;gap:1.5rem;
+}
+.card{background:#fff;border-radius:16px;padding:1.5rem;box-shadow:0 16px 35px rgba(15,23,42,0.08);border:1px solid rgba(15,23,42,0.05)}
+
+.profile-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.profile-heading h2{margin:0;font-size:1.75rem;color:#111827}
+.profile-heading .muted{margin-top:0.25rem}
+.profile-badges{display:flex;flex-wrap:wrap;gap:0.5rem}
+.badge{padding:0.35rem 0.9rem;border-radius:999px;background:#edf2ff;color:#4338ca;font-weight:600;font-size:0.85rem}
+.eyebrow{text-transform:uppercase;letter-spacing:0.18em;font-size:0.7rem;color:var(--detail-muted);margin:0 0 0.35rem 0}
+.muted{color:var(--detail-muted);font-size:0.95rem}
+
+.profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1.25rem}
+.profile-item{background:var(--detail-bg);padding:1rem;border-radius:12px;border:1px solid var(--detail-border)}
+.profile-item span{display:block;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--detail-muted);margin-bottom:0.35rem}
+.profile-item strong{font-size:1.05rem;color:#0f172a}
+
+.card-heading{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem}
+.card-heading h3{margin:0;color:#312e81}
+
+.btn{background:#667eea;color:#fff;border:none;border-radius:10px;padding:0.45rem 1.2rem;font-weight:600;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(102,126,234,0.3)}
+.btn-outline{background:transparent;color:#4c51bf;border:1px solid rgba(76,81,191,0.4)}
+.btn-success{background:#16a34a}
+.btn-danger{background:#dc2626}
+.btn-danger:hover{box-shadow:0 10px 20px rgba(220,38,38,0.3)}
+.action-buttons{display:flex;gap:0.4rem;flex-wrap:wrap}
+
+.marks-card table{width:100%;border-collapse:collapse}
+.marks-card th,.marks-card td{padding:0.85rem;border-bottom:1px solid var(--detail-border);text-align:left}
+.marks-card th{background:#eef2ff;font-size:0.85rem;color:#475569;text-transform:uppercase;letter-spacing:0.08em}
+.marks-card td:nth-child(3){font-weight:700;color:#0f766e}
+
+.marks-form{display:flex;flex-direction:column;gap:1rem}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.form-grid label{font-size:0.85rem;font-weight:600;color:#0f172a;display:flex;flex-direction:column;gap:0.4rem}
+.form-grid select,
+.form-grid input{border:1px solid var(--detail-border);border-radius:10px;padding:0.65rem;font-size:0.95rem}
+.form-actions{display:flex;flex-wrap:wrap;align-items:center;gap:0.75rem}
+.save-status{color:var(--detail-muted);min-height:1.2rem}
+.save-status.success{color:#16a34a;font-weight:600}
+
+@media (max-width:700px){
+  .profile-heading{flex-direction:column}
+  .card-heading{flex-direction:column;align-items:flex-start}
+}

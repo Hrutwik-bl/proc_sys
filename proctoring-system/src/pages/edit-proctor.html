@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Edit Proctor</title>
+    <link rel="stylesheet" href="../css/styles.css"/>
+    <style>
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            color: #333;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+        .btn-group {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="../images/logo.png" alt="Logo"/>
+        <h1>Edit Proctor</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="admin-dashboard.html">Back to Admin</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="dashboard-container">
+            <div class="card">
+                <h3 id="formTitle">Add New Proctor</h3>
+                <form id="proctorForm">
+                    <div class="form-group">
+                        <label for="id">Employee ID (Required)</label>
+                        <input type="text" id="id" name="id" required/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="name">Name (Required)</label>
+                        <input type="text" id="name" name="name" required/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dept">Department</label>
+                        <input type="text" id="dept" name="dept"/>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-success">Save Proctor</button>
+                        <button type="button" class="btn btn-danger" onclick="location.href='admin-dashboard.html'">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Proctoring System</p>
+    </footer>
+    <script>
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const idParam = getQueryParam('id');
+        const form = document.getElementById('proctorForm');
+
+        // Check if editing existing proctor
+        if (idParam) {
+            document.getElementById('formTitle').textContent = 'Edit Proctor';
+            const pList = JSON.parse(localStorage.getItem('proctors') || '[]');
+            const proctor = pList.find(p => p.id === idParam);
+            
+            if (proctor) {
+                document.getElementById('id').value = proctor.id;
+                document.getElementById('name').value = proctor.name;
+                document.getElementById('email').value = proctor.email;
+                document.getElementById('dept').value = proctor.dept;
+                document.getElementById('id').disabled = true;
+            }
+        }
+
+        // Handle form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const newProctor = {
+                id: document.getElementById('id').value.trim(),
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                dept: document.getElementById('dept').value.trim()
+            };
+
+            let proctorList = JSON.parse(localStorage.getItem('proctors') || '[]');
+
+            if (idParam) {
+                // Edit mode - update existing proctor
+                proctorList = proctorList.map(p => 
+                    p.id === idParam ? newProctor : p
+                );
+            } else {
+                // Add mode - check if ID already exists
+                if (proctorList.some(p => p.id === newProctor.id)) {
+                    alert('Proctor with this ID already exists!');
+                    return;
+                }
+                proctorList.push(newProctor);
+            }
+
+            localStorage.setItem('proctors', JSON.stringify(proctorList));
+            alert('Proctor saved successfully!');
+            location.href = 'admin-dashboard.html';
+        });
+    </script>
+</body>
+</html>

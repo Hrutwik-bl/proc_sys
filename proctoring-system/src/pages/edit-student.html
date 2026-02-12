@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="../css/styles.css"/>
+    <style>
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            color: #333;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+        .btn-group {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="../images/logo.png" alt="Logo"/>
+        <h1>Edit Student</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="admin-dashboard.html">Back to Admin</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="dashboard-container">
+            <div class="card">
+                <h3 id="formTitle">Add New Student</h3>
+                <form id="studentForm">
+                    <div class="form-group">
+                        <label for="usn">USN (Required)</label>
+                        <input type="text" id="usn" name="usn" required/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fullName">Full Name (Required)</label>
+                        <input type="text" id="fullName" name="fullName" required/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gsuite">GSuite ID</label>
+                        <input type="email" id="gsuite" name="gsuite"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parentName">Parent/Guardian Name</label>
+                        <input type="text" id="parentName" name="parentName"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="parentPhone">Parent Phone</label>
+                        <input type="tel" id="parentPhone" name="parentPhone"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dept">Department</label>
+                        <input type="text" id="dept" name="dept"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sem">Semester</label>
+                        <input type="text" id="sem" name="sem"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sec">Section</label>
+                        <input type="text" id="sec" name="sec"/>
+                    </div>
+                    
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-success">Save Student</button>
+                        <button type="button" class="btn btn-danger" onclick="location.href='admin-dashboard.html'">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Proctoring System</p>
+    </footer>
+    <script>
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const usnParam = getQueryParam('usn');
+        const form = document.getElementById('studentForm');
+
+        // Check if editing existing student
+        if (usnParam) {
+            document.getElementById('formTitle').textContent = 'Edit Student';
+            const sList = JSON.parse(localStorage.getItem('students') || '[]');
+            const student = sList.find(s => s.usn === usnParam);
+            
+            if (student) {
+                document.getElementById('usn').value = student.usn;
+                document.getElementById('fullName').value = student.fullName;
+                document.getElementById('gsuite').value = student.gsuite;
+                document.getElementById('phone').value = student.phone;
+                document.getElementById('parentName').value = student.parentName;
+                document.getElementById('parentPhone').value = student.parentPhone;
+                document.getElementById('dept').value = student.dept;
+                document.getElementById('sem').value = student.sem;
+                document.getElementById('sec').value = student.sec;
+                document.getElementById('usn').disabled = true;
+            }
+        }
+
+        // Handle form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const newStudent = {
+                usn: document.getElementById('usn').value.trim(),
+                fullName: document.getElementById('fullName').value.trim(),
+                gsuite: document.getElementById('gsuite').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                parentName: document.getElementById('parentName').value.trim(),
+                parentPhone: document.getElementById('parentPhone').value.trim(),
+                dept: document.getElementById('dept').value.trim(),
+                sem: document.getElementById('sem').value.trim(),
+                sec: document.getElementById('sec').value.trim()
+            };
+
+            let studentList = JSON.parse(localStorage.getItem('students') || '[]');
+
+            if (usnParam) {
+                // Edit mode - update existing student
+                studentList = studentList.map(s => 
+                    s.usn === usnParam ? newStudent : s
+                );
+            } else {
+                // Add mode - check if USN already exists
+                if (studentList.some(s => s.usn === newStudent.usn)) {
+                    alert('Student with this USN already exists!');
+                    return;
+                }
+                studentList.push(newStudent);
+            }
+
+            localStorage.setItem('students', JSON.stringify(studentList));
+            alert('Student saved successfully!');
+            location.href = 'admin-dashboard.html';
+        });
+    </script>
+</body>
+</html>

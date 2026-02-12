@@ -1,0 +1,34 @@
+{
+    "appName": "Proctoring System",
+    "version": "1.0.0",
+    "description": "A web application for managing proctoring systems in engineering colleges.",
+    "settings": {
+        "theme": "light",
+        "language": "en",
+        "notifications": true
+    },
+    "dashboard": {
+        "student": {
+            "title": "Student Dashboard",
+            "icon": "images/student-icon.png"
+        },
+        "proctor": {
+            "title": "Proctor Dashboard",
+            "icon": "images/proctor-icon.png"
+        },
+        "admin": {
+            "title": "Admin Dashboard",
+            "icon": "images/admin-icon.png"
+        }
+    },
+    "api": {
+        "baseUrl": "https://api.proctoringsystem.com",
+        "endpoints": {
+            "login": "/auth/login",
+            "logout": "/auth/logout",
+            "getStudents": "/students",
+            "getProctors": "/proctors",
+            "getAdminData": "/admin/data"
+        }
+    }
+}

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Proctor Dashboard</title>
+    <link rel="stylesheet" href="../css/styles.css"/>
+    <link rel="stylesheet" href="../css/proctor-dashboard.css"/>
+    <style>
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        .stat-card h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #eee;
+        }
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            border-bottom: 3px solid transparent;
+            color: #666;
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="../images/logo.png" alt="Logo"/>
+        <h1>Proctor Dashboard</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="proctor-dashboard.html">Dashboard</a></li>
+            <li><a href="../login.html" onclick="logout(event)">Logout</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h1>👨‍🏫 Proctor Dashboard</h1>
+                <p id="proctorInfo">Welcome, Proctor!</p>
+                <img src="../images/logo.png" alt="Logo" class="dashboard-logo"/>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h4>Total Students</h4>
+                    <p class="number" id="totalStudents">0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Exams Conducted</h4>
+                    <p class="number" id="examsConducted">0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Average Score</h4>
+                    <p class="number" id="avgScore">0%</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Pass Rate</h4>
+                    <p class="number" id="passRate">0%</p>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab('students')">My Students</button>
+                <button class="tab-btn" onclick="switchTab('exams')">Exams</button>
+                <button class="tab-btn" onclick="switchTab('reports')">Reports</button>
+            </div>
+
+            <!-- Tab 1: My Students -->
+            <div id="students" class="tab-content active">
+                <div class="card">
+                    <h3>📋 Assigned Students</h3>
+                    <table id="studentsTable">
+                        <thead>
+                            <tr>
+                                <th>USN</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Dept</th>
+                                <th>Phone</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
+                <div class="card internal-marks-card">
+                    <h3>🧮 Internal Marks Entry</h3>
+                    <form id="internalMarksForm" class="internal-form">
+                        <div class="form-grid">
+                            <label for="internalStudentSelect">Student</label>
+                            <select id="internalStudentSelect" required>
+                                <option value="">Select student</option>
+                            </select>
+
+                            <label for="internalExamSelect">Exam / Course</label>
+                            <select id="internalExamSelect" required>
+                                <option value="">Select exam</option>
+                            </select>
+
+                            <label for="internalComponent">Component</label>
+                            <select id="internalComponent" required>
+                                <option value="IA-1">IA-1</option>
+                                <option value="IA-2">IA-2</option>
+                                <option value="IA-3">IA-3</option>
+                                <option value="Assignment">Assignment</option>
+                                <option value="Project">Project</option>
+                            </select>
+
+                            <label for="internalScore">Marks (out of 50)</label>
+                            <input type="number" id="internalScore" min="0" max="50" step="1" placeholder="e.g., 42" required/>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success">Save Marks</button>
+                            <span id="internalMarksStatus" class="save-status" aria-live="polite"></span>
+                        </div>
+                    </form>
+
+                    <div class="internal-marks-list">
+                        <h4>Recent Entries</h4>
+                        <table id="internalMarksTable">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Exam</th>
+                                    <th>Component</th>
+                                    <th>Marks</th>
+                                    <th>Updated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5" style="text-align:center;">No entries recorded yet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Exams -->
+            <div id="exams" class="tab-content">
+                <div class="card">
+                    <h3>📝 Scheduled Exams</h3>
+                    <table id="examsTable">
+                        <thead>
+                            <tr>
+                                <th>Exam Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Students</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tab 3: Reports -->
+            <div id="reports" class="tab-content">
+                <div class="card">
+                    <h3>📊 Student Performance Report</h3>
+                    <table id="reportsTable">
+                        <thead>
+                            <tr>
+                                <th>USN</th>
+                                <th>Name</th>
+                                <th>Total Exams</th>
+                                <th>Avg Score</th>
+                                <th>Pass Status</th>
+                                <th>Last Exam</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Proctoring System. All rights reserved.</p>
+    </footer>
+    <script src="../js/proctor-dashboard.js"></script>
+</body>
+</html>

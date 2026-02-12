@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKIT Proctoring System</title>
+    <meta name="description" content="A comprehensive proctoring system designed for SKIT Engineering College to conduct fair, secure, and scalable online proctoring with real-time monitoring.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+    <!-- ===== HEADER / NAVBAR ===== -->
+    <header id="header">
+        <div class="container header-content">
+            <a href="#home" class="logo-section">
+                <img src="images/logo.png" alt="SKIT Logo" class="logo" onerror="this.style.display='none'"/>
+                <span class="site-title">SKIT <span class="highlight">Proctor</span></span>
+            </a>
+            <nav id="navbar">
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+                    <li><a href="login.html" class="btn btn-nav">Login <i class="fa-solid fa-arrow-right-to-bracket"></i></a></li>
+                </ul>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== HERO ===== -->
+        <section id="home" class="hero">
+            <div class="hero-bg">
+                <div class="hero-gradient"></div>
+                <div class="hero-grid"></div>
+                <div class="hero-orb hero-orb-1"></div>
+                <div class="hero-orb hero-orb-2"></div>
+                <div class="hero-orb hero-orb-3"></div>
+            </div>
+            <div class="container hero-content">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-shield-halved"></i> Trusted by SKIT Engineering College
+                </div>
+                <h1>Secure Online<br><span class="gradient-text">Proctoring System</span></h1>
+                <p class="hero-subtitle">A comprehensive proctoring platform engineered for academic integrity — real-time monitoring, intelligent analytics, and management for students, proctors, and administrators.</p>
+                <div class="hero-buttons">
+                    <a href="login.html" class="btn btn-primary btn-lg">
+                        Get Started <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#features" class="btn btn-outline btn-lg">
+                        <i class="fa-solid fa-play"></i> Explore Features
+                    </a>
+                </div>
+                <div class="hero-stats-row">
+                    <div class="hero-stat">
+                        <strong>500+</strong>
+                        <span>Active Students</span>
+                    </div>
+                    <div class="hero-stat-divider"></div>
+                    <div class="hero-stat">
+                        <strong>50+</strong>
+                        <span>Proctors</span>
+                    </div>
+                    <div class="hero-stat-divider"></div>
+                    <div class="hero-stat">
+                        <strong>99.9%</strong>
+                        <span>Uptime</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-scroll-indicator">
+                <a href="#features"><i class="fa-solid fa-chevron-down"></i></a>
+            </div>
+        </section>
+
+        <!-- ===== FEATURES ===== -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header" data-animate>
+                    <span class="section-badge">Features</span>
+                    <h2>Everything You Need for<br><span class="gradient-text">Secure Proctoring System</span></h2>
+                    <p>Role-based dashboards designed for each stakeholder with powerful tools and real-time insights.</p>
+                </div>
+
+                <div class="features-grid">
+                    <!-- Student Card -->
+                    <div class="feature-card" data-animate>
+                        <div class="card-accent accent-blue"></div>
+                        <div class="card-icon-wrap icon-blue">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <h3>Student Portal</h3>
+                        <p class="card-desc">A personalized dashboard for students.</p>
+                        <ul class="card-list">
+                            <li><i class="fa-solid fa-check"></i> View past exam results & scores</li>
+                            <li><i class="fa-solid fa-check"></i> Access upcoming exam schedules</li>
+                            <li><i class="fa-solid fa-check"></i> Students Can See their Self Reflection</li>
+                            <li><i class="fa-solid fa-check"></i> Track academic performance trends</li>
+                        </ul>
+                    </div>
+
+                    <!-- Proctor Card -->
+                    <div class="feature-card featured" data-animate>
+                        <div class="card-accent accent-cyan"></div>
+                        <div class="featured-badge">Most Used</div>
+                        <div class="card-icon-wrap icon-cyan">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                        </div>
+                        <h3>Proctor Dashboard</h3>
+                        <p class="card-desc">Real-time monitoring tools for Students Monitoring.</p>
+                        <ul class="card-list">
+                            <li><i class="fa-solid fa-check"></i> Monitor students in real-time</li>
+                            <li><i class="fa-solid fa-check"></i> Generate detailed proctoring reports</li>
+                            <li><i class="fa-solid fa-check"></i> View student performance analytics</li>
+                            <li><i class="fa-solid fa-check"></i> Flag & review incidents</li>
+                        </ul>
+                    </div>
+
+                    <!-- Admin Card -->
+                    <div class="feature-card" data-animate>
+                        <div class="card-accent accent-green"></div>
+                        <div class="card-icon-wrap icon-green">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h3>Admin Console</h3>
+                        <p class="card-desc">Complete system control with user management and analytics.</p>
+                        <ul class="card-list">
+                            <li><i class="fa-solid fa-check"></i> Manage users — students & proctors</li>
+                            <li><i class="fa-solid fa-check"></i> Assign proctors to Students</li>
+                            <li><i class="fa-solid fa-check"></i> Configure login credentials</li>
+                            <li><i class="fa-solid fa-check"></i> View system-wide analytics</li>
+                            <li><i class="fa-solid fa-check"></i> Activity logging & audit trail</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== HOW IT WORKS ===== -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="section-header" data-animate>
+                    <span class="section-badge">Process</span>
+                    <h2>How It Works</h2>
+                    <p>A streamlined 4-step workflow from proctoring setup to result delivery.</p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card" data-animate>
+                        <div class="step-number">01</div>
+                        <div class="step-icon"><i class="fa-solid fa-user-plus"></i></div>
+                        <h3>Admin Setup</h3>
+                        <p>Administrator creates registers students, and assigns proctors.</p>
+                    </div>
+                    <div class="step-connector"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="step-card" data-animate>
+                        <div class="step-number">02</div>
+                        <div class="step-icon"><i class="fa-solid fa-desktop"></i></div>
+                        <h3>Student Login</h3>
+                        <p>Students securely log in with their credentials, verify identity, and enter the monitored environment.</p>
+                    </div>
+                    <div class="step-connector"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="step-card" data-animate>
+                        <div class="step-number">03</div>
+                        <div class="step-icon"><i class="fa-solid fa-eye"></i></div>
+                        <h3>Live Monitoring</h3>
+                        <p>Proctors monitor students in real-time.</p>
+                    </div>
+                    <div class="step-connector"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="step-card" data-animate>
+                        <div class="step-number">04</div>
+                        <div class="step-icon"><i class="fa-solid fa-chart-column"></i></div>
+                        <h3>Reports & Results</h3>
+                        <p>Detailed reports are generated with integrity scores, analytics dashboards.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== STATS ===== -->
+        <section class="stats">
+            <div class="container stats-grid">
+                <div class="stat-item" data-animate>
+                    <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                    <h4 data-count="500">0</h4>
+                    <span class="stat-suffix">+</span>
+                    <p>Active Students</p>
+                </div>
+                <div class="stat-item" data-animate>
+                    <div class="stat-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <h4 data-count="50">0</h4>
+                    <span class="stat-suffix">+</span>
+                    <p>Certified Proctors</p>
+                </div>
+                <div class="stat-item" data-animate>
+                    <div class="stat-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+                    <h4 data-count="100">0</h4>
+                    <span class="stat-suffix">+</span>
+                    <p>Exams Conducted</p>
+                </div>
+                <div class="stat-item" data-animate>
+                    <div class="stat-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                    <h4 data-count="99.9" data-decimal="true">0</h4>
+                    <span class="stat-suffix">%</span>
+                    <p>System Uptime</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA ===== -->
+        <section class="cta">
+            <div class="cta-bg">
+                <div class="cta-orb cta-orb-1"></div>
+                <div class="cta-orb cta-orb-2"></div>
+            </div>
+            <div class="container cta-content">
+                <h2>Ready to Secure access to your account?</h2>
+                <p>Join hundreds of students and faculty who trust SKIT Proctor for fair, secure, and reliable online Monitoring.</p>
+                <div class="cta-buttons">
+                    <a href="login.html" class="btn btn-white btn-lg">Login Now <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="#features" class="btn btn-ghost btn-lg">Learn More</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="images/logo.png" alt="SKIT Logo" class="logo" onerror="this.style.display='none'"/>
+                    <span>SKIT <span class="highlight">Proctor</span></span>
+                </div>
+                <p>Secure, scalable, and reliable online proctoring platform built for SKIT Engineering College.</p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Portals</h4>
+                    <ul>
+                        <li><a href="login.html">Student Login</a></li>
+                        <li><a href="login.html">Proctor Login</a></li>
+                        <li><a href="login.html">Admin Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Status Page</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>&copy; SKIT Engineering College. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
